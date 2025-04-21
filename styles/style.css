@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Arial', sans-serif;
+  padding: 20px;
+  -webkit-text-size-adjust: 100%; /* Фикс для iOS */
+}
+
+.text-column {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+.text-line {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5em;
+  font-size: min(5vw, 42px); /* Фиксированный максимум */
+  font-weight: bold;
+  line-height: 1;
+  text-size-adjust: none; /* Блокируем изменение размера текста */
+}
+
+.text-part {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  padding: 0.1em 0;
+}
+
+.video-strip {
+  flex: 1;
+  height: 1em;
+  min-height: 12px; /* Абсолютный минимум */
+  margin: 0 0.5em;
+  overflow: hidden;
+  position: relative;
+  min-width: 40px; /* Жесткий минимум ширины */
+  background: black;
+}
+
+.video-strip video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.01); /* Микро-перекрытие для артефактов */
+}
+
+/* Жесткая фиксация для мобильных */
+@media (max-width: 600px) {
+  .text-line {
+    font-size: min(6vw, 32px);
+    flex-wrap: nowrap; /* Запрещаем перенос */
+    overflow-x: auto; /* Скролл если не помещается */
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .video-strip {
+    min-height: 10px;
+    min-width: 30px;
+  }
+  
+  body {
+    padding: 10px;
+    touch-action: manipulation; /* Фикс для зума на мобильных */
+  }
+}
